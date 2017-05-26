@@ -12,18 +12,18 @@ environment:
     secure: 8GKkrghj8KAhgmIxGneHfLGuY5V1o+Q3eptS91w4wlMh99IZi7jUefeW/IdIPKGX
 
 init:
-    - %PYTHONEXE% -m pip install --upgrade pip
+    - $env:PYTHONEXE -m pip install --upgrade pip
 
     # Install pywin32-ctypes 0.0.1 due to https://github.com/enthought/pywin32-ctypes/issues/60
-    - %PYTHONEXE% -m pip install pywin32-ctypes==0.0.1
+    - $env:PYTHONEXE -m pip install pywin32-ctypes==0.0.1
 
     # Install cryptography (may be 1.8.1) to avoid 'openssl' error
-    - %PYTHONEXE% -m pip install cryptography
+    - $env:PYTHONEXE -m pip install cryptography
 
     # Install sphinx and its extensions
-    - %PYTHONEXE% -m pip install sphinx-docfx-yaml
-    - %PYTHONEXE% -m pip install sphinx --upgrade
-    - %PYTHONEXE% -m pip install sphinx_rtd_theme
+    - $env:PYTHONEXE -m pip install sphinx-docfx-yaml
+    - $env:PYTHONEXE -m pip install sphinx --upgrade
+    - $env:PYTHONEXE -m pip install sphinx_rtd_theme
 
 clone_script:
     - git config --global core.autocrlf true
@@ -35,7 +35,7 @@ install:
     - cd c:\projects\azure-sdk-for-python
     
     # Ignore STDOUT
-    - %PYTHONEXE% setup.py install > null
+    - $env:PYTHONEXE setup.py install > null
 
 build: off
 
