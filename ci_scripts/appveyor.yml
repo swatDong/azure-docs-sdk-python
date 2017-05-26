@@ -1,0 +1,31 @@
+version: 1.0.{build}
+branches:
+  only:
+  - appveyor-master
+skip_tags: true
+
+environment:
+  github_access_token:
+    secure: 8GKkrghj8KAhgmIxGneHfLGuY5V1o+Q3eptS91w4wlMh99IZi7jUefeW/IdIPKGX
+  
+clone_script:
+    - git config --global core.autocrlf true
+    - git config core.autocrlf
+
+    - cd c:\projects
+    - git clone -q --branch=master https://github.com/swatDong/azure-sdk-for-python
+    
+before_build:
+    - python -m pip install --upgrade pip
+    
+build:
+    - cd c:\projects\azure-sdk-for-python
+    - python setup.py install
+  
+on_finish:
+    - cd c:\projects\azure-sdk-for-python\doc
+    - call make.bat html
+    - ps: Write-Host "begin on_success"
+    - ps: Copy-Item -Path C:\projects\azure-sdk-for-python\doc\_build\html -Destination c:\projects\azure-docs-sdk-python\docs-ref-autogen -Recurse
+    - cd c:\projects\azure-docs-sdk-python\docs-ref-autogen
+    - dir
