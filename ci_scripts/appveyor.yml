@@ -5,43 +5,44 @@ branches:
 skip_tags: true
 
 environment:
-  # Use Python 3.5
-  PYTHONEXE: c:\python35\python.exe
+  matrix:
+    # Use Python 3.5
+    - PYTHON: "C:/Python35"
 
   github_access_token:
     secure: 8GKkrghj8KAhgmIxGneHfLGuY5V1o+Q3eptS91w4wlMh99IZi7jUefeW/IdIPKGX
 
 init:
-    - $env:PYTHONEXE -m pip install --upgrade pip
+    - "%PYTHON%/python.exe -m pip install --upgrade pip"
 
     # Install pywin32-ctypes 0.0.1 due to https://github.com/enthought/pywin32-ctypes/issues/60
-    - $env:PYTHONEXE -m pip install pywin32-ctypes==0.0.1
+    - "%PYTHON%/python.exe -m pip install pywin32-ctypes==0.0.1"
 
     # Install cryptography (may be 1.8.1) to avoid 'openssl' error
-    - $env:PYTHONEXE -m pip install cryptography
+    - "%PYTHON%/python.exe -m pip install cryptography"
 
     # Install sphinx and its extensions
-    - $env:PYTHONEXE -m pip install sphinx-docfx-yaml
-    - $env:PYTHONEXE -m pip install sphinx --upgrade
-    - $env:PYTHONEXE -m pip install sphinx_rtd_theme
+    - "%PYTHON%/python.exe -m pip install sphinx-docfx-yaml"
+    - "%PYTHON%/python.exe -m pip install sphinx --upgrade"
+    - "%PYTHON%/python.exe -m pip install sphinx_rtd_theme"
 
 clone_script:
     - git config --global core.autocrlf true
     - git config core.autocrlf
-    - cd c:\projects
+    - cd c:/projects
     - git clone -q --branch=master https://github.com/swatDong/azure-sdk-for-python
 
 install:
-    - cd c:\projects\azure-sdk-for-python
+    - cd c:/projects/azure-sdk-for-python
     
     # Ignore STDOUT
-    - $env:PYTHONEXE setup.py install > null
+    - "%PYTHON%/python.exe setup.py install > null"
 
 build: off
 
 on_success:
-    - cd c:\projects\azure-sdk-for-python\doc
+    - cd c:/projects/azure-sdk-for-python/doc
     - call make.bat html
-    - ps: Copy-Item -Path c:\projects\azure-sdk-for-python\doc\_build\html -Destination c:\projects\azure-docs-sdk-python\docs-ref-autogen -Recurse
-    - cd c:\projects\azure-docs-sdk-python\docs-ref-autogen
+    - ps: Copy-Item -Path c:/projects/azure-sdk-for-python/doc/_build/html -Destination c:/projects/azure-docs-sdk-python/docs-ref-autogen -Recurse
+    - cd c:/projects/azure-docs-sdk-python/docs-ref-autogen
     - dir
