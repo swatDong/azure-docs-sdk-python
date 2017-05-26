@@ -15,26 +15,27 @@ clone_script:
     - git clone -q --branch=master https://github.com/swatDong/azure-sdk-for-python
     
 before_build:
-    - C:\Python35\python.exe -m pip install --upgrade pip
+    - c:\python35\python.exe -m pip install --upgrade pip
     
     # Install pywin32-ctypes 0.0.1 due to https://github.com/enthought/pywin32-ctypes/issues/60
-    - C:\Python35\python.exe -m pip install pywin32-ctypes==0.0.1
+    - c:\python35\python.exe -m pip install pywin32-ctypes==0.0.1
     
     # Install cryptography (may be 1.8.1) to avoid 'openssl' error
-    - C:\Python35\python.exe -m pip install cryptography
+    - c:\python35\python.exe -m pip install cryptography
     
     # Install sphinx and its extensions
-    - C:\Python35\python.exe -m pip install sphinx-docfx-yaml
-    - C:\Python35\python.exe -m pip install sphinx --upgrade
-    - C:\Python35\python.exe -m pip install sphinx_rtd_theme
+    - c:\python35\python.exe -m pip install sphinx-docfx-yaml
+    - c:\python35\python.exe -m pip install sphinx --upgrade
+    - c:\python35\python.exe -m pip install sphinx_rtd_theme
     
-build:
-    - cd c:\projects\azure-sdk-for-python
-    - C:\Python35\python.exe setup.py install
+build_script:
+    - cmd: >-
+        cd c:\projects\azure-sdk-for-python
+        c:\python35\python.exe setup.py install
   
 on_finish:
     - cd c:\projects\azure-sdk-for-python\doc
     - call make.bat html
-    - ps: Copy-Item -Path C:\projects\azure-sdk-for-python\doc\_build\html -Destination c:\projects\azure-docs-sdk-python\docs-ref-autogen -Recurse
+    - ps: Copy-Item -Path c:\projects\azure-sdk-for-python\doc\_build\html -Destination c:\projects\azure-docs-sdk-python\docs-ref-autogen -Recurse
     - cd c:\projects\azure-docs-sdk-python\docs-ref-autogen
     - dir
