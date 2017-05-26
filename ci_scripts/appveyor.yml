@@ -17,22 +17,22 @@ clone_script:
     - git clone -q --branch=master https://github.com/swatDong/azure-sdk-for-python
     
 before_build:
-    - "%PYTHON%\\python.exe -m pip install --upgrade pip
+    - "%PYTHON%\\python.exe -m pip install --upgrade pip"
     
     # Install pywin32-ctypes 0.0.1 due to https://github.com/enthought/pywin32-ctypes/issues/60
-    - "%PYTHON%\\python.exe -m pip install pywin32-ctypes==0.0.1
+    - "%PYTHON%\\python.exe -m pip install pywin32-ctypes==0.0.1"
     
     # Install cryptography (may be 1.8.1) to avoid 'openssl' error
-    - "%PYTHON%\\python.exe -m pip install cryptography
+    - "%PYTHON%\\python.exe -m pip install cryptography"
     
     # Install sphinx and its extensions
-    - "%PYTHON%\\python.exe -m pip install sphinx-docfx-yaml
-    - "%PYTHON%\\python.exe -m pip install sphinx --upgrade
-    - "%PYTHON%\\python.exe -m pip install sphinx_rtd_theme
+    - "%PYTHON%\\python.exe -m pip install sphinx-docfx-yaml"
+    - "%PYTHON%\\python.exe -m pip install sphinx --upgrade"
+    - "%PYTHON%\\python.exe -m pip install sphinx_rtd_theme"
     
 build:
     - cd c:\projects\azure-sdk-for-python
-    - "%PYTHON%\\python.exe setup.py install
+    - "%PYTHON%\\python.exe setup.py install"
   
 on_finish:
     - cd c:\projects\azure-sdk-for-python\doc
