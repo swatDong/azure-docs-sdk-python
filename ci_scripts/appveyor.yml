@@ -8,7 +8,8 @@ environment:
   matrix:
     # Use Python 3.5
     - PYTHON: "C:/Python35"
-    - SPHINXBUILD: "%PYTHON%/scripts/sphinx-build.exe"
+      SPHINXBUILD: "%PYTHON%/scripts/sphinx-build.exe"
+
   github_access_token:
     secure: 8GKkrghj8KAhgmIxGneHfLGuY5V1o+Q3eptS91w4wlMh99IZi7jUefeW/IdIPKGX
 
