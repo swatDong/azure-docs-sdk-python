@@ -18,9 +18,10 @@ clone_script:
 before_build:
     - python -m pip install --upgrade pip
     
-build:
-    - cd c:\projects\azure-sdk-for-python
-    - python setup.py install
+build_script:
+- cmd: >-
+    cd c:\projects\azure-sdk-for-python
+    python setup.py install
   
 on_finish:
     - cd c:\projects\azure-sdk-for-python\doc
