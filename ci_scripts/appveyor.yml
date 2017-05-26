@@ -30,7 +30,7 @@ clone_script:
 
 install:
     - cd c:\projects\azure-sdk-for-python
-    - c:\python35\python.exe setup.py install
+    - c:\python35\python.exe setup.py install > null
 
 build: off
 
