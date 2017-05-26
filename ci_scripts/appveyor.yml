@@ -1,7 +1,4 @@
 version: 1.0.{build}
-branches:
-  only:
-  - appveyor-master
 skip_tags: true
 
 environment:
@@ -42,7 +39,19 @@ build: off
 
 on_success:
     - cd c:/projects/azure-sdk-for-python/doc
+
+    # TODO: generate yml and copy to c:/projects/azure-docs-sdk-python/docs-ref-autogen
     - call make.bat html
     - ps: Copy-Item -Path c:/projects/azure-sdk-for-python/doc/_build/html -Destination c:/projects/azure-docs-sdk-python/docs-ref-autogen -Recurse
-    - cd c:/projects/azure-docs-sdk-python/docs-ref-autogen
-    - dir
+
+    - git config --global credential.helper store
+    - ps: ac "$env:USERPROFILE\.git-credentials" "https://$($env:github_access_token):x-oauth-basic@github.com`n"
+    - cd c:/projects/azure-docs-sdk-python
+    - git status
+    - git config --global user.name "swatDong"
+    - git config --global user.email "09122swat@gmail.com"
+    - git add .
+    - git commit -a -m "appveyor ci - update yml files"
+
+    # TODO: to master branch
+    - git push -u origin appveyor-master -f
