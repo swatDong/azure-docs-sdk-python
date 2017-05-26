@@ -5,22 +5,25 @@ branches:
 skip_tags: true
 
 environment:
+  # Use Python 3.5
+  PYTHONEXE: c:\python35\python.exe
+
   github_access_token:
     secure: 8GKkrghj8KAhgmIxGneHfLGuY5V1o+Q3eptS91w4wlMh99IZi7jUefeW/IdIPKGX
 
 init:
-    - c:\python35\python.exe -m pip install --upgrade pip
+    - %PYTHON35EXE% -m pip install --upgrade pip
 
     # Install pywin32-ctypes 0.0.1 due to https://github.com/enthought/pywin32-ctypes/issues/60
-    - c:\python35\python.exe -m pip install pywin32-ctypes==0.0.1
+    - %PYTHON35EXE% -m pip install pywin32-ctypes==0.0.1
 
     # Install cryptography (may be 1.8.1) to avoid 'openssl' error
-    - c:\python35\python.exe -m pip install cryptography
+    - %PYTHON35EXE% -m pip install cryptography
 
     # Install sphinx and its extensions
-    - c:\python35\python.exe -m pip install sphinx-docfx-yaml
-    - c:\python35\python.exe -m pip install sphinx --upgrade
-    - c:\python35\python.exe -m pip install sphinx_rtd_theme
+    - %PYTHON35EXE% -m pip install sphinx-docfx-yaml
+    - %PYTHON35EXE% -m pip install sphinx --upgrade
+    - %PYTHON35EXE% -m pip install sphinx_rtd_theme
 
 clone_script:
     - git config --global core.autocrlf true
@@ -30,7 +33,9 @@ clone_script:
 
 install:
     - cd c:\projects\azure-sdk-for-python
-    - c:\python35\python.exe setup.py install > null
+    
+    # Ignore STDOUT
+    - %PYTHON35EXE% setup.py install > null
 
 build: off
 
