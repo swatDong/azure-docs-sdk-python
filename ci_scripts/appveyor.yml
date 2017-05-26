@@ -5,8 +5,6 @@ branches:
 skip_tags: true
 
 environment:
-  matrix:
-    - PYTHON: "C:\\Python35"
   github_access_token:
     secure: 8GKkrghj8KAhgmIxGneHfLGuY5V1o+Q3eptS91w4wlMh99IZi7jUefeW/IdIPKGX
   
@@ -17,19 +15,22 @@ clone_script:
     - git clone -q --branch=master https://github.com/swatDong/azure-sdk-for-python
     
 before_build:
-    - "%PYTHON%\\python.exe -m pip install --upgrade pip"
+    - C:\Python35\python.exe -m pip install --upgrade pip
     
-    - "%PYTHON%\\python.exe -m pip install pywin32-ctypes==0.0.1"
+    # Install pywin32-ctypes 0.0.1 due to https://github.com/enthought/pywin32-ctypes/issues/60
+    - C:\Python35\python.exe -m pip install pywin32-ctypes==0.0.1
     
-    - "%PYTHON%\\python.exe -m pip install cryptography"
+    # Install cryptography (may be 1.8.1) to avoid 'openssl' error
+    - C:\Python35\python.exe -m pip install cryptography
     
-    - "%PYTHON%\\python.exe -m pip install sphinx-docfx-yaml"
-    - "%PYTHON%\\python.exe -m pip install sphinx --upgrade"
-    - "%PYTHON%\\python.exe -m pip install sphinx_rtd_theme"
+    # Install sphinx and its extensions
+    - C:\Python35\python.exe -m pip install sphinx-docfx-yaml
+    - C:\Python35\python.exe -m pip install sphinx --upgrade
+    - C:\Python35\python.exe -m pip install sphinx_rtd_theme
     
 build:
     - cd c:\projects\azure-sdk-for-python
-    - "%PYTHON%\\python.exe setup.py install"
+    - C:\Python35\python.exe setup.py install
   
 on_finish:
     - cd c:\projects\azure-sdk-for-python\doc
