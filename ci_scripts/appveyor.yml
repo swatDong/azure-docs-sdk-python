@@ -31,6 +31,7 @@ clone_script:
     - git config core.autocrlf
     - cd c:/projects
     - git clone -q --branch=master https://github.com/swatDong/azure-sdk-for-python
+    - git clone -q --branch=master https://github.com/swatDong/azure-docs-sdk-python
 
 install:
     - cd c:/projects/azure-sdk-for-python
@@ -57,4 +58,4 @@ on_success:
     - git commit -a -m "appveyor ci - update yml files"
 
     # TODO: to master branch
-    - git push -u origin appveyor-master -f
+    - git push -u origin appveyor-master-ci -f
