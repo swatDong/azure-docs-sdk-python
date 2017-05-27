@@ -18,10 +18,11 @@ init:
     # Install cryptography (may be 1.8.1) to avoid 'openssl' error
     - "%PYTHON%/python.exe -m pip install cryptography"
 
-    # Install sphinx and its extensions
+    # Install sphinx (1.5.5) and its extensions
+    - "%PYTHON%/python.exe -m pip install sphinx==1.5.5"
     - "%PYTHON%/python.exe -m pip install sphinx-docfx-yaml"
-    - "%PYTHON%/python.exe -m pip install sphinx --upgrade"
     - "%PYTHON%/python.exe -m pip install sphinx_rtd_theme"
+    - "%PYTHON%/python.exe -m pip show sphinx"
 
 clone_script:
     - git config --global core.autocrlf true
