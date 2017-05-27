@@ -46,19 +46,20 @@ on_success:
     - cd c:/projects/azure-sdk-for-python/doc
 
     # TODO: generate yml and copy to c:/projects/azure-docs-sdk-python/docs-ref-autogen
-    - ps: Copy-Item c:/projects/azure-docs-sdk-python/ci_scripts/conf.py -Destination c:/projects/azure-sdk-for-python/doc/conf.py
-    - call make.bat html
-    - ps: Remove-Item c:/projects/azure-docs-sdk-python/docs-ref-autogen/* -Recurse
-    - ps: Copy-Item -Path c:/projects/azure-sdk-for-python/doc/_build/html/docfx_yaml -Destination c:/projects/azure-docs-sdk-python/docs-ref-autogen -Recurse
+    #- ps: Copy-Item c:/projects/azure-docs-sdk-python/ci_scripts/conf.py -Destination c:/projects/azure-sdk-for-python/doc/conf.py
+    #- call make.bat html
+    #- ps: Remove-Item c:/projects/azure-docs-sdk-python/docs-ref-autogen/* -Recurse
+    #- ps: Copy-Item -Path c:/projects/azure-sdk-for-python/doc/_build/html/docfx_yaml -Destination c:/projects/azure-docs-sdk-python/docs-ref-autogen -Recurse
+    - ps: Remove-Item c:/projects/azure-docs-sdk-python/ci_scripts/* -Recurse
 
     - git config --global credential.helper store
-    - ps: ac "$env:USERPROFILE\.git-credentials" "https://$($env:github_access_token):x-oauth-basic@github.com`n"
+    - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:github_access_token):x-oauth-basic@github.com`n"
     - cd c:/projects/azure-docs-sdk-python
     - git status
     - git config --global user.name "swatDong"
     - git config --global user.email "09122swat@gmail.com"
     - git add . > null
-    - git commit -a -m "appveyor ci - update yml files"
+    - git commit -a -m "appveyor ci - update yml files" > null
 
     # TODO: to master branch
     - git push -u origin master:appveyor-master-ci -f
