@@ -38,7 +38,7 @@ install:
     - cd c:/projects/azure-sdk-for-python
     
     # Ignore STDOUT
-    #- "%PYTHON%/python.exe setup.py install > null"
+    - "%PYTHON%/python.exe setup.py install > null"
 
 build: off
 
@@ -46,11 +46,10 @@ on_success:
     - cd c:/projects/azure-sdk-for-python/doc
 
     # TODO: generate yml and copy to c:/projects/azure-docs-sdk-python/docs-ref-autogen
-    #- ps: Copy-Item c:/projects/azure-docs-sdk-python/ci_scripts/conf.py -Destination c:/projects/azure-sdk-for-python/doc/conf.py
-    #- call make.bat html
-    #- ps: Remove-Item c:/projects/azure-docs-sdk-python/docs-ref-autogen/* -Recurse
-    #- ps: Copy-Item -Path c:/projects/azure-sdk-for-python/doc/_build/html/docfx_yaml -Destination c:/projects/azure-docs-sdk-python/docs-ref-autogen -Recurse
-    - ps: Remove-Item c:/projects/azure-docs-sdk-python/ci_scripts/* -Recurse
+    - ps: Copy-Item c:/projects/azure-docs-sdk-python/ci_scripts/conf.py -Destination c:/projects/azure-sdk-for-python/doc/conf.py
+    - call make.bat html
+    - ps: Remove-Item c:/projects/azure-docs-sdk-python/docs-ref-autogen/* -Recurse
+    - ps: Copy-Item -Path c:/projects/azure-sdk-for-python/doc/_build/html/docfx_yaml -Destination c:/projects/azure-docs-sdk-python/docs-ref-autogen -Recurse
 
     - cd c:/projects/azure-docs-sdk-python
     - git config --global credential.helper store
