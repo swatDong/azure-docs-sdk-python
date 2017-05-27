@@ -25,7 +25,8 @@ htmlhelp_basename = 'pyexampledoc'
 
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.napoleon',
-              'extension']
+              'sphinx.ext.extlinks',
+              'docfx_yaml.extension']
 
 napoleon_use_admonition_for_examples = True 
 
@@ -33,5 +34,3 @@ exclude_patterns = [
   '_build',
   '*.tests.rst'
 ]
-
-source_prefix = '/bindings/python'
