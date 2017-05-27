@@ -51,8 +51,8 @@ on_success:
     - git status
     - git config --global user.name "swatDong"
     - git config --global user.email "09122swat@gmail.com"
-    - git add .
+    - git add . > null
     - git commit -a -m "appveyor ci - update yml files"
 
     # TODO: to master branch
-    - git push -u origin appveyor-master-ci -f
+    - git push -u origin master:appveyor-master-ci -f
